@@ -15,9 +15,6 @@ RUN npm install
 # Bundle app source
 COPY . /home/node
 
-# Build for non-local environment
-RUN if [ $NODE_ENV != "local" ] ; then npm run build ; fi
-
 # Expose port
 EXPOSE 3000
 
