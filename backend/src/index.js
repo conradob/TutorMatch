@@ -5,15 +5,11 @@ if (currentEnv === 'local') {
 }
 
 const createServer = require('./createServer');
+const createRouter = require('./createRouter');
+
 const server = createServer();
 
-const Router = require('koa-router');
-
-const router = new Router();
-
-router.get('/list', async ctx => (ctx.body = await ctx.db.tutors({})));
-
-server.use(router.routes()).use(router.allowedMethods());
+createRouter(server);
 
 const port = process.env.PORT || 4444;
 server
