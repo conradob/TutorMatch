@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
+const ListTitle = styled.h2`
+  display: grid;
+  grid-template-columns: 1fr auto;
+`;
+
 const TutorUl = styled.ul`
   display: grid;
   grid-gap: 4rem;
@@ -36,7 +41,7 @@ const TutorItemStyle = styled.li`
   }
 `;
 
-const BigButton = styled.button`
+const DeleteButton = styled.button`
   font-size: 3rem;
   background: none;
   border: 0;
@@ -46,12 +51,33 @@ const BigButton = styled.button`
   }
 `;
 
+const AddButton = styled.button`
+  padding: 1rem 2rem;
+  color: ${props => props.theme.lightgrey};
+  display: inline-block;
+  background: ${props => props.theme.blue};
+  transition: 0.3s;
+  font-weight: 1rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+`;
+
 const TutorList = ({ list = [] }) => {
   return (
     <div>
-      <h2>
+      <ListTitle>
         You have {list.length} tutor{list.length > 1 ? 's' : ''}.
-      </h2>
+        <Link
+          href={{
+            pathname: '/add',
+          }}
+        >
+          <AddButton>Add Tutor</AddButton>
+        </Link>
+      </ListTitle>
       <TutorUl>
         {list.map(tutor => (
           <TutorItemStyle key={tutor.id}>
@@ -68,7 +94,7 @@ const TutorList = ({ list = [] }) => {
                 </div>
               </a>
             </Link>
-            <BigButton>&times;</BigButton>
+            <DeleteButton>&times;</DeleteButton>
           </TutorItemStyle>
         ))}
       </TutorUl>

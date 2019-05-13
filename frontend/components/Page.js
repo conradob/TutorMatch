@@ -4,6 +4,7 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 const theme = {
   red: '#FF0000',
   black: '#393939',
+  blue: '#347eed',
   grey: '#3A3A3A',
   lightgrey: '#E1E1E1',
   offWhite: '#EDEDED',
