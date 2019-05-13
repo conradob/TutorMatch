@@ -1,0 +1,62 @@
+version: '3.7'
+
+services:
+  frontend:
+    build: ./frontend
+    command: bash -c "npm run dev"
+    container_name: tutormatch_frontend
+    env_file:
+      - frontend/variables.env
+    restart: on-failure
+    depends_on:
+      - backend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/home/node/
+      - /home/node/node_modules
+
+  backend:
+    build: ./backend
+    command: bash -c "npm run deploy && npm start"
+    container_name: tutormatch_backend
+    env_file:
+      - backend/variables.env
+    restart: on-failure
+    depends_on:
+      - prisma
+    ports:
+      - '4444:4444'
+    volumes:
+      - ./backend:/home/node/
+      - /home/node/node_modules
+
+  prisma:
+    image: prismagraphql/prisma:1.32
+    restart: always
+    container_name: tutormatch_prisma
+    depends_on:
+      - postgres
+    ports:
+    - "4466:4466"
+    environment:
+      PRISMA_CONFIG: |
+        port: 4466
+        databases:
+          default:
+            connector: postgres
+            host: postgres
+            port: 5432
+            user: prisma
+            password: prisma
+            migrations: true
+
+  postgres:
+    image: postgres:10.5
+    restart: on-failure
+    container_name: tutormatch_postgres
+    environment:
+      POSTGRES_USER: prisma
+      POSTGRES_PASSWORD: prisma
+    volumes:
+      - ./backend/volumes/postgres:/var/lib/postgresql/data
