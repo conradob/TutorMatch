@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import Button from './styles/Button';
+import DeleteTutor from './DeleteTutor';
 
 const ListTitle = styled.h2`
   display: grid;
@@ -42,21 +44,13 @@ const TutorItemStyle = styled.li`
   }
 `;
 
-const DeleteButton = styled.button`
-  font-size: 3rem;
-  background: none;
-  border: 0;
-  &:hover {
-    color: ${props => props.theme.red};
-    cursor: pointer;
-  }
-`;
-
 const TutorList = ({ list = [] }) => {
+  const [tutors, setTutors] = useState(list);
+
   return (
     <div>
       <ListTitle>
-        You have {list.length} tutor{list.length > 1 ? 's' : ''}.
+        You have {tutors.length} tutor{tutors.length > 1 ? 's' : ''}.
         <Link
           href={{
             pathname: '/add',
@@ -66,7 +60,7 @@ const TutorList = ({ list = [] }) => {
         </Link>
       </ListTitle>
       <TutorUl>
-        {list.map(tutor => (
+        {tutors.map(tutor => (
           <TutorItemStyle key={tutor.id}>
             <Link
               href={{
@@ -81,7 +75,12 @@ const TutorList = ({ list = [] }) => {
                 </div>
               </a>
             </Link>
-            <DeleteButton>&times;</DeleteButton>
+            <DeleteTutor
+              id={tutor.id}
+              onDelete={id => {
+                setTutors(tutors.filter(el => el.id !== id));
+              }}
+            />
           </TutorItemStyle>
         ))}
       </TutorUl>
