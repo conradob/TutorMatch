@@ -8,6 +8,7 @@
     "deploy": "npx prisma deploy --env-file variables.env"
   },
   "dependencies": {
+    "@koa/cors": "^2.2.3",
     "babel-preset-env": "^1.7.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.3",
@@ -15,6 +16,7 @@
     "graphql": "^0.13.2",
     "jsonwebtoken": "8.3.0",
     "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "nodemon": "1.18.4",
     "prisma": "^1.22.2",

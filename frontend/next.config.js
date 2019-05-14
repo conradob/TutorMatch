@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+const webpack = require('webpack');
 
 const currentEnv = process.env.ENV_NAME || 'local';
 

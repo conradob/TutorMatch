@@ -1,13 +1,21 @@
 import axios from 'axios';
 
+const isBrowser = new Function(
+  'try {return this===window;}catch(e){return false;}'
+);
+
 export default async ({ url, method = 'get', payload }) => {
   try {
-    const { API_ENDPOINT } = process.env;
+    const { CLIENT_API } = process.env;
+    const { SERVER_API } = process.env;
 
     const { data } = await axios({
       method,
-      url: `${API_ENDPOINT}${url}`,
-      data: payload,
+      url: `${isBrowser() ? CLIENT_API : SERVER_API}${url}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: typeof payload === 'string' ? payload : JSON.stringify(payload),
     });
 
     return { data };

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import Button from './styles/Button';
 
 const ListTitle = styled.h2`
   display: grid;
@@ -8,8 +9,8 @@ const ListTitle = styled.h2`
 
 const TutorUl = styled.ul`
   display: grid;
-  grid-gap: 4rem;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  grid-gap: 3rem;
+  grid-template-columns: auto-fit;
 `;
 
 const TutorItemStyle = styled.li`
@@ -22,8 +23,8 @@ const TutorItemStyle = styled.li`
   h2 {
     border-bottom: 2px solid red;
     margin-top: 0;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
   }
   .tutor-meta {
     display: grid;
@@ -51,20 +52,6 @@ const DeleteButton = styled.button`
   }
 `;
 
-const AddButton = styled.button`
-  padding: 1rem 2rem;
-  color: ${props => props.theme.lightgrey};
-  display: inline-block;
-  background: ${props => props.theme.blue};
-  transition: 0.3s;
-  font-weight: 1rem;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  position: relative;
-  cursor: pointer;
-`;
-
 const TutorList = ({ list = [] }) => {
   return (
     <div>
@@ -75,7 +62,7 @@ const TutorList = ({ list = [] }) => {
             pathname: '/add',
           }}
         >
-          <AddButton>Add Tutor</AddButton>
+          <Button>Add Tutor</Button>
         </Link>
       </ListTitle>
       <TutorUl>
