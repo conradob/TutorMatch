@@ -20,6 +20,7 @@ export default async ({ url, method = 'get', payload }) => {
 
     return { data };
   } catch (err) {
+    console.error(err);
     throw err;
   }
 };

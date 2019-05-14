@@ -1,10 +1,10 @@
-import api from '../lib/api';
-import TutorList from '../components/TutorList';
+import fetch from '../lib/api';
+import List from '../components/List';
 
-const Index = ({ list }) => <TutorList list={list} />;
+const Index = ({ list }) => <List list={list} />;
 
 Index.getInitialProps = async () => {
-  const { data: list = [] } = await api({ url: '/list' });
+  const { data: list = [] } = await fetch({ url: '/list' });
   return { list };
 };
 

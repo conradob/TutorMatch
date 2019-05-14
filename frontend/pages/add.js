@@ -1,3 +1,3 @@
-import AddTutor from '../components/AddTutor';
+import CreateTutor from '../components/CreateTutor';
 
-export default () => <AddTutor />;
+export default () => <CreateTutor />;
