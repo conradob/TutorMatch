@@ -1,4 +1,4 @@
-# TutorMatch Project
+# Fullstack Project
 
 TutorMatch is a project that helps students find the best tutors.
 
